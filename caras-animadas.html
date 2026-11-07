@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Caras en movimiento</title>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <canvas role="img" aria-label="Círculos grises con caras que se desplazan y rebotan suavemente."></canvas>
+
+  <script>
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+    // Posición inicial, dirección, tono y expresión de cada cara.
+    const designs = [
+      { x: .13, y: .27, angle: .46, fill: '#8d8c87', face: 'smile' },
+      { x: .37, y: .27, angle: 2.03, fill: '#cfcec7', face: 'quiet' },
+      { x: .62, y: .27, angle: 1.15, fill: '#a8a7a0', face: 'smile' },
+      { x: .87, y: .27, angle: 2.66, fill: '#555550', face: 'open', light: true },
+      { x: .25, y: .73, angle: -1.94, fill: '#b9b8b1', face: 'smile' },
+      { x: .50, y: .73, angle: -1.05, fill: '#72716c', face: 'quiet', light: true },
+      { x: .75, y: .73, angle: -2.28, fill: '#d8d7d0', face: 'smile' }
+    ];
+
+    let width = 0;
+    let height = 0;
+    let circles = [];
+    let frameId = 0;
+    let previousTime = 0;
+    let visible = true;
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (const circle of circles) {
+        const r = circle.radius;
+        ctx.save();
+        ctx.translate(circle.x, circle.y);
+        ctx.rotate(circle.tilt);
+        ctx.scale(r, r);
+
+        ctx.fillStyle = circle.fill;
+        ctx.beginPath();
+        ctx.arc(0, 0, 1, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = circle.light ? '#f1f0ea' : '#1b1b19';
+        ctx.lineWidth = .075;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(-.23, -.19);
+        ctx.lineTo(-.22, -.035);
+        ctx.moveTo(.21, -.19);
+        ctx.lineTo(.20, -.035);
+
+        if (circle.face === 'smile') {
+          ctx.moveTo(-.33, .14);
+          ctx.quadraticCurveTo(0, .54, .33, .14);
+        } else if (circle.face === 'quiet') {
+          ctx.moveTo(-.20, .23);
+          ctx.quadraticCurveTo(0, .32, .22, .21);
+        } else {
+          ctx.moveTo(.12, .23);
+          ctx.ellipse(0, .23, .12, .15, 0, 0, Math.PI * 2);
+        }
+
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    function keepInside(circle) {
+      const r = circle.radius;
+
+      if (circle.x < r || circle.x > width - r) {
+        circle.vx = circle.x < r ? Math.abs(circle.vx) : -Math.abs(circle.vx);
+        circle.x = Math.max(r, Math.min(width - r, circle.x));
+      }
+
+      if (circle.y < r || circle.y > height - r) {
+        circle.vy = circle.y < r ? Math.abs(circle.vy) : -Math.abs(circle.vy);
+        circle.y = Math.max(r, Math.min(height - r, circle.y));
+      }
+    }
+
+    function collide(a, b) {
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const distance = Math.hypot(dx, dy);
+      const overlap = a.radius + b.radius - distance;
+      if (overlap <= 0) return;
+
+      const nx = distance ? dx / distance : 1;
+      const ny = distance ? dy / distance : 0;
+      const correction = overlap / 2;
+      a.x -= correction * nx;
+      a.y -= correction * ny;
+      b.x += correction * nx;
+      b.y += correction * ny;
+
+      const approach = (a.vx - b.vx) * nx + (a.vy - b.vy) * ny;
+      if (approach <= 0) return;
+
+      // Intercambia el movimiento en el punto de contacto con un rebote leve.
+      const impulse = approach * .99;
+      a.vx -= impulse * nx;
+      a.vy -= impulse * ny;
+      b.vx += impulse * nx;
+      b.vy += impulse * ny;
+    }
+
+    function animate(time) {
+      const step = previousTime ? Math.min((time - previousTime) / 1000, .025) : 0;
+      previousTime = time;
+
+      for (const circle of circles) {
+        circle.x += circle.vx * step;
+        circle.y += circle.vy * step;
+        circle.tilt += circle.spin * step;
+        keepInside(circle);
+      }
+
+      for (let i = 0; i < circles.length; i++) {
+        for (let j = i + 1; j < circles.length; j++) {
+          collide(circles[i], circles[j]);
+        }
+      }
+
+      circles.forEach(keepInside);
+      draw();
+      frameId = requestAnimationFrame(animate);
+    }
+
+    function updateAnimation() {
+      cancelAnimationFrame(frameId);
+      previousTime = 0;
+
+      if (visible && !document.hidden && !reduceMotion.matches && circles.length) {
+        frameId = requestAnimationFrame(animate);
+      }
+    }
+
+    function resize() {
+      const nextWidth = canvas.clientWidth;
+      const nextHeight = canvas.clientHeight;
+      if (!nextWidth || !nextHeight || (nextWidth === width && nextHeight === height)) return;
+
+      width = nextWidth;
+      height = nextHeight;
+      const scale = Math.min(devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * scale);
+      canvas.height = Math.round(height * scale);
+      ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+      const radius = Math.min(width * .114, height * .218);
+      const speed = Math.max(9, Math.min(radius * .48, 27));
+
+      circles = designs.map((design, index) => ({
+        ...design,
+        x: design.x * width,
+        y: design.y * height,
+        radius,
+        vx: Math.cos(design.angle) * speed,
+        vy: Math.sin(design.angle) * speed,
+        tilt: (index - 3) * .14,
+        spin: index % 2 ? -.13 : .10
+      }));
+
+      draw();
+      updateAnimation();
+    }
+
+    new ResizeObserver(resize).observe(canvas);
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      updateAnimation();
+    }).observe(canvas);
+    reduceMotion.addEventListener('change', updateAnimation);
+    document.addEventListener('visibilitychange', updateAnimation);
+    resize();
+  </script>
+</body>
+</html>

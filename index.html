@@ -1,0 +1,2238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="Portafolio de Gerardo Acevedo. Diseño Industrial PUCV: construcción, materialidad, fabricación digital y comunicación."
+  >
+  <title>Gerardo Acevedo — Diseño Industrial</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      background: #efeee9;
+      color: #171717;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9;
+      opacity: .065;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23000' filter='url(%23n)' opacity='.6' d='M0 0h160v160H0z'/%3E%3C/svg%3E");
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .mono,
+    .eyebrow,
+    nav {
+      font-family: "Courier New", monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      line-height: 1.6;
+      letter-spacing: .1em;
+    }
+
+    /* NAVEGACIÓN */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #efeee9f5;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 4vw;
+      gap: 20px;
+    }
+
+    .brand {
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 12px;
+      letter-spacing: .15em;
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+    }
+
+    nav a {
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+
+    .menu-button {
+      display: none;
+      background: none;
+      border: 1px solid;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .wrap {
+      width: min(1440px, 92%);
+      margin: auto;
+    }
+
+    /* PORTADA */
+
+    .hero {
+      padding-top: 35px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid;
+    }
+
+    .topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .hero h1 {
+      font-family: Impact, "Arial Narrow", Arial, sans-serif;
+      font-size: clamp(90px, 18.5vw, 290px);
+      font-weight: 900;
+      letter-spacing: -.045em;
+      line-height: .77;
+      margin: 65px 0 30px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 span {
+      display: block;
+      margin-left: 17%;
+    }
+
+    .hero-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin: 25px 0 45px;
+      gap: 30px;
+    }
+
+    .hero-bottom p {
+      max-width: 340px;
+      font-size: 17px;
+      line-height: 1.45;
+    }
+
+    .circle-link {
+      height: 100px;
+      width: 100px;
+      border: 1px solid;
+      border-radius: 50%;
+      display: grid;
+      place-content: center;
+      text-decoration: none;
+      font-size: 35px;
+      transition: background .2s, color .2s;
+    }
+
+    .circle-link:hover {
+      background: #111;
+      color: #fff;
+    }
+
+    .metal {
+      position: absolute;
+      width: 31%;
+      right: -2%;
+      top: 110px;
+      transform: rotate(-13deg);
+      opacity: .8;
+    }
+
+    .stripe {
+      background: #191919;
+      color: #eee;
+      padding: 13px 0;
+      transform: rotate(-2deg) scale(1.05);
+      margin: 28px 0 35px;
+      font: 11px "Courier New", monospace;
+      letter-spacing: .2em;
+      text-align: center;
+    }
+
+    /* SECCIONES */
+
+    .section {
+      padding: 85px 0;
+      border-bottom: 1px solid;
+    }
+
+    .section-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid;
+      padding-top: 10px;
+      margin-bottom: 42px;
+    }
+
+    .section-title {
+      font-family: Impact, "Arial Narrow", Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: clamp(48px, 8.5vw, 125px);
+      line-height: .95;
+      letter-spacing: -.035em;
+      margin: 0 0 45px;
+      overflow-wrap: anywhere;
+    }
+
+    /* PRESENTACIÓN */
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+      gap: 70px;
+    }
+
+    .intro-portrait {
+      min-width: 0;
+    }
+
+    .intro-portrait h2 {
+      font-size: clamp(40px, 5.5vw, 80px);
+      font-weight: 900;
+      line-height: .95;
+      letter-spacing: -.065em;
+      margin: 0 0 32px;
+    }
+
+    .intro-image {
+      display: block;
+      width: 72%;
+      max-width: 280px;
+      height: auto;
+      margin: 0 auto;
+      background: transparent;
+    }
+
+    .intro-copy p {
+      font-size: clamp(18px, 2vw, 26px);
+      line-height: 1.45;
+      margin: 0 0 25px;
+    }
+
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tags span {
+      border: 1px solid;
+      padding: 7px 10px;
+      font: 10px "Courier New", monospace;
+      text-transform: uppercase;
+    }
+
+    /* ÍNDICE Y ANIMACIONES */
+
+    #indice {
+      overflow: visible;
+    }
+
+    .index-row {
+      display: grid;
+      grid-template-columns:
+        minmax(180px, .7fr)
+        minmax(0, 1.1fr)
+        minmax(0, 1fr)
+        30px;
+      gap: 25px;
+      align-items: center;
+      border-top: 1px solid;
+      padding: 32px 8px;
+      text-decoration: none;
+      overflow: visible;
+    }
+
+    .index-number {
+      display: block;
+      min-width: 0;
+      margin: 0;
+      padding: .08em .1em;
+      font-family: Impact, "Arial Narrow", Arial, sans-serif;
+      font-size: clamp(110px, 13vw, 190px);
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.1;
+      letter-spacing: -.04em;
+      white-space: nowrap;
+      transform: rotate(-5deg);
+      transform-origin: center;
+    }
+
+    .index-row:nth-of-type(even) .index-number {
+      transform: rotate(4deg);
+    }
+
+    .index-name {
+      min-width: 0;
+    }
+
+    .index-name h3 {
+      font-size: clamp(23px, 2.7vw, 40px);
+      letter-spacing: -.05em;
+      line-height: 1;
+      margin: 0 0 16px;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .arrow {
+      font-size: 30px;
+    }
+
+    .index-row .art-model {
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
+      height: clamp(240px, 24vw, 340px);
+      background: transparent;
+    }
+
+    .art-model iframe {
+      display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: transparent;
+    }
+
+    .art-animation iframe {
+      pointer-events: none;
+    }
+
+    /* ÁREAS DE CONOCIMIENTO */
+
+    .area-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+      gap: 70px;
+      margin-bottom: 45px;
+    }
+
+    .area-intro h2 {
+      font-size: clamp(38px, 5.5vw, 78px);
+      line-height: .98;
+      letter-spacing: -.055em;
+      margin: 0;
+    }
+
+    .area-intro p {
+      font-size: clamp(18px, 2vw, 26px);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .example-label {
+      margin-bottom: 18px;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 12px 15px;
+      border: 1px solid;
+      font: 12px/1.5 "Courier New", monospace;
+      text-decoration: none;
+    }
+
+    .project-link:hover {
+      background: #171717;
+      color: #efeee9;
+    }
+
+    /* PROYECTOS Y GALERÍAS */
+
+    .construction-project {
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 1px solid;
+    }
+
+    .construction-project + .construction-project {
+      margin-top: 75px;
+    }
+
+    .construction-project-head {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+      gap: 50px;
+      margin-bottom: 32px;
+    }
+
+    .construction-project h3 {
+      font-size: clamp(38px, 5vw, 72px);
+      line-height: .95;
+      letter-spacing: -.055em;
+      margin: 15px 0 24px;
+      text-transform: uppercase;
+    }
+
+    .construction-project-copy p {
+      margin: 0 0 18px;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .project-materials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .project-materials span {
+      border: 1px solid;
+      padding: 7px 10px;
+      font: 10px/1.5 "Courier New", monospace;
+      text-transform: uppercase;
+    }
+
+    .construction-project figure,
+    .digital-gallery figure {
+      min-width: 0;
+      min-height: 0;
+      margin: 0;
+    }
+
+    .construction-project figcaption,
+    .digital-gallery figcaption {
+      margin: 0;
+      padding: 9px 0 0;
+      font-family: "Courier New", monospace;
+      text-transform: uppercase;
+      font-size: 9px;
+      line-height: 1.5;
+      letter-spacing: .05em;
+      color: #555;
+    }
+
+    .project-photo {
+      position: relative;
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      aspect-ratio: var(--photo-ratio, 4 / 3);
+      background: #dad9d3;
+      overflow: hidden;
+    }
+
+    .project-photo img {
+      display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 10px;
+      object-fit: contain;
+      object-position: center;
+      visibility: hidden;
+    }
+
+    .project-photo img.is-loaded {
+      visibility: visible;
+    }
+
+    .photo-error {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      padding: 20px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #555;
+      font: 12px/1.5 "Courier New", monospace;
+    }
+
+    .construction-gallery,
+    .terrain-gallery {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+      gap: 20px;
+    }
+
+    .construction-gallery {
+      grid-template-rows: auto auto;
+      align-items: start;
+    }
+
+    .construction-gallery > figure:first-child {
+      grid-column: 1;
+      grid-row: 1 / 3;
+    }
+
+    .construction-gallery > figure:nth-child(2) {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .construction-gallery > figure:nth-child(3) {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    /* DISEÑO DE OBJETO */
+
+    .object-gallery {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+      gap: 20px;
+      align-items: stretch;
+      min-width: 0;
+    }
+
+    .object-main {
+      grid-column: 1;
+    }
+
+    .object-side {
+      position: relative;
+      grid-column: 2;
+      min-width: 0;
+      min-height: 0;
+    }
+
+    .object-side-inner {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .object-side-inner figure {
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
+      min-height: 0;
+    }
+
+    .object-side .project-photo {
+      height: 100%;
+      aspect-ratio: auto;
+    }
+
+    .object-side .project-photo img {
+      padding: 7px;
+    }
+
+    .construction-project .object-side figcaption {
+      padding-top: 6px;
+      font-size: 8px;
+      line-height: 1.4;
+    }
+
+    /* MODELO TOPOGRÁFICO */
+
+    .terrain-gallery {
+      align-items: center;
+    }
+
+    .terrain-main .project-photo {
+      aspect-ratio: var(--module-main-ratio, var(--photo-ratio, 4 / 3));
+    }
+
+    .terrain-secondary .project-photo {
+      aspect-ratio: var(--module-secondary-ratio, var(--photo-ratio, 4 / 3));
+    }
+
+    /* FABRICACIÓN DIGITAL */
+
+    .fabrication-group + .fabrication-group {
+      margin-top: 75px;
+      padding-top: 35px;
+      border-top: 1px solid;
+    }
+
+    .digital-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+      gap: 26px 20px;
+    }
+
+    .digital-gallery .project-photo {
+      aspect-ratio: 4 / 3;
+    }
+
+    .digital-gallery .project-photo img {
+      padding: clamp(8px, 1.2vw, 16px);
+    }
+
+    /* COMUNICACIÓN E INTERACCIÓN */
+
+    .brand-gallery {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      align-items: start;
+      gap: 26px 20px;
+    }
+
+    .brand-gallery figure {
+      grid-column: span 2;
+    }
+
+    .brand-gallery figure:nth-child(-n+2) {
+      grid-column: span 3;
+    }
+
+    .brand-gallery .project-photo {
+      aspect-ratio: 16 / 10;
+    }
+
+    /* CONTACTO */
+
+    .contact {
+      background: #191919;
+      color: #f0eee9;
+      padding: 70px 4vw 30px;
+      overflow: hidden;
+    }
+
+    .contact h2 {
+      font-family: Impact, "Arial Narrow", Arial, sans-serif;
+      letter-spacing: -.035em;
+      font-size: clamp(65px, 14vw, 200px);
+      line-height: .85;
+      margin: 55px 0;
+    }
+
+    .contact-main {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 25px;
+      padding: 30px 0 70px;
+    }
+
+    .contact-item {
+      min-width: 0;
+      border-top: 1px solid #777;
+      padding-top: 12px;
+    }
+
+    .contact-item .mono {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .contact-item a {
+      font-size: clamp(15px, 1.55vw, 22px);
+      text-underline-offset: 5px;
+      overflow-wrap: anywhere;
+    }
+
+    .contact footer {
+      border-top: 1px solid #777;
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* ACCESIBILIDAD */
+
+    .skip {
+      position: fixed;
+      top: -100px;
+      left: 10px;
+      background: #111;
+      color: #fff;
+      z-index: 30;
+      padding: 12px;
+    }
+
+    .skip:focus {
+      top: 10px;
+    }
+
+    :focus-visible {
+      outline: 2px solid #777;
+      outline-offset: 5px;
+    }
+
+    ::selection {
+      background: #111;
+      color: #fff;
+    }
+
+    @media (min-width: 1550px) {
+      .hero h1 {
+        font-size: 285px;
+      }
+    }
+
+    @media (max-width: 850px) {
+      header {
+        flex-wrap: wrap;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      nav {
+        display: none;
+        width: 100%;
+        flex-wrap: wrap;
+        padding: 12px 0;
+      }
+
+      nav.open {
+        display: flex;
+      }
+
+      .intro-grid,
+      .area-intro,
+      .construction-project-head {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 30px;
+      }
+
+      .index-row {
+        grid-template-columns: 125px minmax(0, 1fr) 130px 24px;
+        gap: 16px;
+      }
+
+      .index-number {
+        font-size: 110px;
+      }
+
+      .index-name h3 {
+        font-size: 24px;
+      }
+
+      .hero h1 {
+        margin-top: 55px;
+      }
+
+      .metal {
+        top: 100px;
+      }
+
+      .contact-main {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 650px) {
+      .construction-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px 12px;
+      }
+
+      .construction-gallery > figure:first-child {
+        grid-column: 1 / -1;
+        grid-row: 1;
+      }
+
+      .construction-gallery > figure:nth-child(2) {
+        grid-column: 1;
+        grid-row: 2;
+      }
+
+      .construction-gallery > figure:nth-child(3) {
+        grid-column: 2;
+        grid-row: 2;
+      }
+
+      .project-photo img {
+        padding: 7px;
+      }
+
+      .object-gallery,
+      .terrain-gallery {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+      }
+
+      .terrain-gallery .terrain-secondary {
+        width: calc((100% - 12px) / 2);
+        justify-self: center;
+      }
+
+      .object-side {
+        position: static;
+        grid-column: 1;
+      }
+
+      .object-side-inner {
+        position: static;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-rows: auto;
+        gap: 10px;
+      }
+
+      .object-side-inner figure {
+        grid-template-rows: auto auto;
+        align-content: start;
+      }
+
+      .object-side .project-photo {
+        height: auto;
+        aspect-ratio: 1 / 1;
+      }
+
+      .object-side .project-photo img {
+        padding: 5px;
+      }
+
+      .construction-project .object-side figcaption {
+        letter-spacing: 0;
+      }
+
+      .brand-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px 12px;
+      }
+
+      .brand-gallery figure,
+      .brand-gallery figure:nth-child(-n+2) {
+        grid-column: auto;
+      }
+
+      .brand-gallery figure:last-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .wrap {
+        width: 90%;
+      }
+
+      .brand {
+        font-size: 10px;
+      }
+
+      .hero h1 {
+        font-size: 24vw;
+        margin: 60px 0 30px;
+      }
+
+      .hero h1 span {
+        margin-left: 0;
+      }
+
+      .metal {
+        width: 45%;
+        right: -12%;
+        top: 90px;
+        opacity: .45;
+      }
+
+      .hero-bottom {
+        align-items: center;
+      }
+
+      .hero-bottom p {
+        font-size: 15px;
+        max-width: 230px;
+      }
+
+      .circle-link {
+        flex-shrink: 0;
+        width: 65px;
+        height: 65px;
+        font-size: 25px;
+      }
+
+      .topline {
+        font-size: 9px;
+      }
+
+      .section {
+        padding: 55px 0;
+      }
+
+      .section-label {
+        font-size: 9px;
+      }
+
+      .intro-portrait h2 {
+        font-size: 48px;
+      }
+
+      .section-title {
+        font-size: 12vw;
+      }
+
+      .index-row {
+        grid-template-columns: 90px minmax(0, 1fr) 20px;
+        gap: 12px;
+        padding: 28px 0;
+      }
+
+      .index-number {
+        font-size: 78px;
+        grid-column: 1;
+        grid-row: 1;
+        align-self: start;
+        margin: 0;
+      }
+
+      .index-name {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .index-name h3 {
+        font-size: 24px;
+      }
+
+      .index-name .mono {
+        font-size: 9px;
+      }
+
+      .index-row .art-model {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        height: 280px;
+      }
+
+      .index-row .arrow {
+        grid-column: 3;
+        grid-row: 1;
+      }
+
+      .digital-gallery,
+      .contact-main {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+      }
+
+      .construction-project h3 {
+        font-size: 44px;
+      }
+
+      #modelo-topografico h3 {
+        font-size: clamp(32px, 10vw, 44px);
+      }
+
+      .construction-project-copy p {
+        font-size: 16px;
+      }
+
+      .construction-project + .construction-project,
+      .fabrication-group + .fabrication-group {
+        margin-top: 55px;
+      }
+
+      .contact footer {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .index-row {
+        grid-template-columns: 75px minmax(0, 1fr) 16px;
+        gap: 10px;
+      }
+
+      .index-number {
+        font-size: 64px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+
+  <header>
+    <a class="brand" href="#portada">GERARDO ACEVEDO ↗</a>
+
+    <button
+      class="menu-button mono"
+      type="button"
+      aria-expanded="false"
+      aria-controls="menu"
+    >
+      Menú +
+    </button>
+
+    <nav id="menu" aria-label="Navegación principal">
+      <a href="#presentacion">Presentación</a>
+      <a href="#construccion">Construcción</a>
+      <a href="#fabricacion">Fabricación digital</a>
+      <a href="#comunicacion">Comunicación</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <main id="contenido">
+    <div class="wrap">
+
+      <!-- PORTADA -->
+
+      <section id="portada" class="hero" aria-labelledby="titulo">
+        <div class="topline mono">
+          <span>Diseño Industrial / PUCV</span>
+          <span>Objetos · procesos · territorio</span>
+        </div>
+
+        <svg class="metal" viewBox="0 0 400 450" aria-hidden="true">
+          <path fill="#161616" d="M50 50L280 10L370 95L140 140Z"/>
+          <path fill="#777" d="M140 140L370 95V190L140 235Z"/>
+          <path fill="#262626" d="M50 50L140 140V235L50 145Z"/>
+          <path fill="#333" d="M50 200L280 160L370 245L140 290Z"/>
+          <path fill="#111" d="M140 290L370 245V340L140 385Z"/>
+          <path fill="#888" d="M50 200L140 290V385L50 295Z"/>
+        </svg>
+
+        <h1 id="titulo">PORT<span>FOLIO*</span></h1>
+
+        <div class="hero-bottom">
+          <div>
+            <span class="eyebrow">Gerardo Acevedo / Archivo de trabajos</span>
+            <p>
+              Observar lo cotidiano.<br>
+              Explorar la materia.<br>
+              Dar forma a una idea.
+            </p>
+          </div>
+
+          <a class="circle-link" href="#indice" aria-label="Explorar conocimientos">↓</a>
+        </div>
+      </section>
+
+      <div class="stripe" aria-hidden="true">
+        OBSERVACIÓN ↗ MATERIA ↗ FORMA ↗ CONSTRUCCIÓN ↗
+        OBSERVACIÓN ↗ MATERIA ↗ FORMA
+      </div>
+
+      <!-- PRESENTACIÓN -->
+
+      <section id="presentacion" class="section">
+        <div class="section-label mono">
+          <span>01 / Presentación</span>
+          <span>Persona + oficio</span>
+        </div>
+
+        <div class="intro-grid">
+          <div class="intro-portrait">
+            <h2>Diseñar desde<br>lo que observo.</h2>
+
+            <img
+              class="intro-image"
+              src="Avatar LEGO circular con fondo transparente.png"
+              alt="Avatar LEGO circular de Gerardo Acevedo"
+              width="1254"
+              height="1254"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="intro-copy">
+            <p>
+              Hola, soy Gerardo Acevedo, estudiante de Diseño en la
+              Pontificia Universidad Católica de Valparaíso. Me interesa
+              observar lo cotidiano y explorar cómo las ideas toman forma
+              a través de distintos materiales, objetos y experiencias.
+            </p>
+
+            <p>
+              Disfruto crear, experimentar y descubrir las posibilidades
+              que surgen entre el dibujo, las pruebas materiales y la
+              construcción. Este portafolio reúne trabajos que reflejan
+              ese proceso: desde las primeras preguntas e ideas hasta las
+              decisiones que permiten materializarlas.
+            </p>
+
+            <div class="tags">
+              <span>Observación</span>
+              <span>Experimentación material</span>
+              <span>Prototipado</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ÍNDICE -->
+
+      <section id="indice" class="section index">
+        <div class="section-label mono">
+          <span>Índice / Áreas de conocimiento</span>
+          <span>Qué sé hacer / Cómo lo desarrollo</span>
+        </div>
+
+        <h2 class="section-title">Conocimientos ↘</h2>
+
+        <a class="index-row" href="#construccion">
+          <span class="index-number">01</span>
+
+          <div class="index-name">
+            <h3>Construcción<br>y materialidad</h3>
+            <span class="mono">Materiales / Herramientas / Prototipos</span>
+          </div>
+
+          <div class="art-model">
+            <iframe
+              src="./taladro-360.html"
+              title="Taladro 3D interactivo"
+              data-model-state="__drill"
+              loading="eager"
+            ></iframe>
+          </div>
+
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="index-row" href="#fabricacion">
+          <span class="index-number">02</span>
+
+          <div class="index-name">
+            <h3>Modelado<br>y fabricación digital</h3>
+            <span class="mono">Dibujo / Modelado / Producción</span>
+          </div>
+
+          <div class="art-model">
+            <iframe
+              src="./dado-360.html"
+              title="Dado 3D interactivo"
+              data-model-state="__dice"
+              loading="eager"
+            ></iframe>
+          </div>
+
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="index-row" href="#comunicacion">
+          <span class="index-number">03</span>
+
+          <div class="index-name">
+            <h3>Comunicación<br>e interacción</h3>
+            <span class="mono">Gráfica / Interfaces / Marca</span>
+          </div>
+
+          <div class="art-model art-animation">
+            <iframe
+              src="./caras-animadas.html"
+              title="Círculos grises con caras en movimiento"
+              loading="lazy"
+              tabindex="-1"
+            ></iframe>
+          </div>
+
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+      <!-- CONSTRUCCIÓN Y MATERIALIDAD -->
+
+      <section id="construccion" class="section">
+        <div class="section-label mono">
+          <span>02 / Construcción y materialidad</span>
+          <span>De la idea al objeto</span>
+        </div>
+
+        <div class="area-intro">
+          <h2>Pensar con<br>las manos.</h2>
+          <p>
+            Exploro cómo las ideas toman forma a través del croquis,
+            los materiales y la construcción. Mis proyectos reúnen
+            las primeras propuestas y su desarrollo tangible,
+            conectando lo que imagino con lo que puedo construir.
+          </p>
+        </div>
+
+        <div class="mono example-label">Proyectos de construcción ↘</div>
+
+        <article id="modulo-espacial" class="construction-project" aria-labelledby="titulo-modulo">
+          <div class="construction-project-head">
+            <div>
+              <span class="mono">Proyecto 01 / Construcción</span>
+              <h3 id="titulo-modulo">Módulo<br>espacial</h3>
+
+              <div class="project-materials">
+                <span>Listones de madera</span>
+                <span>Malla raschel</span>
+                <span>Croquis</span>
+                <span>Construcción a escala</span>
+              </div>
+            </div>
+
+            <div class="construction-project-copy">
+              <p>
+                En este proyecto ideamos y construimos un módulo espacial
+                a escala a partir de conceptos propuestos en clase.
+                El desafío consistió en interpretar esas ideas y
+                transformarlas en una estructura tangible.
+              </p>
+
+              <p>
+                Comenzamos con un croquis para explorar la propuesta y
+                definir su forma. Luego pasamos a la elaboración del
+                módulo, utilizando listones de madera, malla raschel
+                y diversas herramientas de construcción.
+              </p>
+
+              <p>
+                El proceso nos permitió relacionar el dibujo con la
+                construcción y explorar cómo los materiales dan forma
+                a una idea espacial.
+              </p>
+            </div>
+          </div>
+
+          <div class="construction-gallery">
+            <figure>
+              <div class="project-photo">
+                <img
+                  data-project-image="principal"
+                  alt="Vista del módulo espacial construido a escala"
+                  decoding="async"
+                >
+                <p class="photo-error" hidden>Imagen no disponible</p>
+              </div>
+              <figcaption>01 / Módulo espacial</figcaption>
+            </figure>
+
+            <figure>
+              <div class="project-photo">
+                <img
+                  data-project-image="croquis"
+                  alt="Croquis inicial del proyecto Módulo espacial"
+                  decoding="async"
+                >
+                <p class="photo-error" hidden>Imagen no disponible</p>
+              </div>
+              <figcaption>02 / Croquis y primera idea</figcaption>
+            </figure>
+
+            <figure>
+              <div class="project-photo">
+                <img
+                  data-project-image="registro"
+                  alt="Registro de construcción del módulo espacial"
+                  decoding="async"
+                >
+                <p class="photo-error" hidden>Imagen no disponible</p>
+              </div>
+              <figcaption>03 / Registro de construcción</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article id="diseno-de-objeto" class="construction-project" aria-labelledby="titulo-objeto">
+          <div class="construction-project-head">
+            <div>
+              <span class="mono">Proyecto 02 / Construcción</span>
+              <h3 id="titulo-objeto">Diseño<br>de objeto</h3>
+
+              <div class="project-materials">
+                <span>Animitas</span>
+                <span>Historia local</span>
+                <span>Lámina metálica</span>
+                <span>Remaches</span>
+                <span>Yeso</span>
+              </div>
+            </div>
+
+            <div class="construction-project-copy">
+              <p>
+                En este proyecto estudiamos la estructura de las animitas
+                y su vínculo con la historia local y la dimensión religiosa.
+                A partir de esta observación, exploramos los materiales
+                y las formas de construir un objeto de este tipo.
+              </p>
+
+              <p>
+                Durante el proceso aprendí a trabajar con láminas de lata:
+                cortar y doblar las piezas, comprender sus posibilidades
+                constructivas y unirlas mediante remaches.
+              </p>
+
+              <p>
+                También experimenté con el yeso para elaborar moldes
+                de las formas que quería desarrollar. El proyecto me
+                permitió relacionar la observación del contexto con
+                decisiones de materialidad, forma y construcción.
+              </p>
+            </div>
+          </div>
+
+          <div class="object-gallery">
+            <figure class="object-main">
+              <div class="project-photo">
+                <img
+                  data-project-image="objetoPrincipal"
+                  alt="Vista principal del proyecto Diseño de objeto"
+                  decoding="async"
+                >
+                <p class="photo-error" hidden>Imagen no disponible</p>
+              </div>
+              <figcaption>01 / Diseño de objeto</figcaption>
+            </figure>
+
+            <div class="object-side">
+              <div class="object-side-inner">
+                <figure>
+                  <div class="project-photo">
+                    <img
+                      data-project-image="objetoRegistro"
+                      alt="Segunda vista del objeto construido"
+                      decoding="async"
+                    >
+                    <p class="photo-error" hidden>Imagen no disponible</p>
+                  </div>
+                  <figcaption>02 / Registro del objeto</figcaption>
+                </figure>
+
+                <figure>
+                  <div class="project-photo">
+                    <img
+                      data-project-image="objetoCroquis"
+                      alt="Croquis del proyecto Diseño de objeto"
+                      decoding="async"
+                    >
+                    <p class="photo-error" hidden>Imagen no disponible</p>
+                  </div>
+                  <figcaption>03 / Exploración mediante croquis</figcaption>
+                </figure>
+
+                <figure>
+                  <div class="project-photo">
+                    <img
+                      data-project-image="objetoCroquisDetalle"
+                      alt="Segundo croquis del proyecto Diseño de objeto"
+                      decoding="async"
+                    >
+                    <p class="photo-error" hidden>Imagen no disponible</p>
+                  </div>
+                  <figcaption>04 / Desarrollo de la propuesta</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article id="modelo-topografico" class="construction-project" aria-labelledby="titulo-topografico">
+          <div class="construction-project-head">
+            <div>
+              <span class="mono">Proyecto 03 / Construcción</span>
+              <h3 id="titulo-topografico">Modelo topográfico<br>de terreno</h3>
+
+              <div class="project-materials">
+                <span>Valle del Achibueno</span>
+                <span>Relieve</span>
+                <span>Travesía PUCV</span>
+                <span>Diseño expositivo</span>
+              </div>
+            </div>
+
+            <div class="construction-project-copy">
+              <p>
+                Para la entrega final del taller, construimos un modelo
+                topográfico del sector del valle del río Achibueno donde
+                se realizó la travesía de la PUCV. La maqueta representa
+                el relieve del terreno y los recorridos que siguió el
+                taller durante sus actividades.
+              </p>
+
+              <p>
+                Mi aporte fue diseñar un espacio expositivo para mostrar
+                los trabajos desarrollados durante el semestre. Como parte
+                de la muestra, construimos un manto de pequeñas piezas
+                triangulares que, al unirse, recreaban las variaciones del
+                relieve del valle.
+              </p>
+
+              <p>
+                Sobre el modelo señalamos las rutas de la travesía. De
+                esta manera, la exposición permitía ubicar los recorridos
+                y relacionar el trabajo del taller con el territorio
+                donde se desarrolló.
+              </p>
+            </div>
+          </div>
+
+          <div class="terrain-gallery">
+            <figure class="terrain-main">
+              <div class="project-photo">
+                <img
+                  data-project-image="terrenoPrincipal"
+                  alt="Imagen principal del proyecto Modelo topográfico de terreno"
+                  decoding="async"
+                >
+                <p class="photo-error" hidden>Imagen no disponible</p>
+              </div>
+              <figcaption>01 / Modelo topográfico de terreno</figcaption>
+            </figure>
+
+            <figure class="terrain-secondary">
+              <div class="project-photo">
+                <img
+                  data-project-image="terrenoRegistro"
+                  alt="Imagen complementaria del proyecto topográfico del Achibueno"
+                  decoding="async"
+                >
+                <p class="photo-error" hidden>Imagen no disponible</p>
+              </div>
+              <figcaption>02 / Registro del proyecto</figcaption>
+            </figure>
+          </div>
+        </article>
+      </section>
+
+      <!-- MODELADO Y FABRICACIÓN DIGITAL -->
+
+      <section id="fabricacion" class="section">
+        <div class="section-label mono">
+          <span>03 / Modelado y fabricación digital</span>
+          <span>Del archivo a la pieza</span>
+        </div>
+
+        <section class="fabrication-group" aria-labelledby="titulo-medios-digitales">
+          <div class="area-intro">
+            <h2 id="titulo-medios-digitales">Fabricación con<br>medios digitales</h2>
+
+            <div>
+              <p>
+                Construir también empieza en la pantalla. En AutoCAD
+                y Fusion 360 desarrollo piezas desde cero, defino sus
+                medidas y preparo los archivos para llevarlas a un
+                material mediante impresión 3D, corte láser o router CNC.
+                El manejo de las máquinas de corte me permite comprobar
+                cómo se traduce el dibujo digital en una pieza física y
+                ajustar el diseño según el resultado.
+              </p>
+
+              <div class="project-materials">
+                <span>AutoCAD</span>
+                <span>Fusion 360</span>
+                <span>Impresión 3D</span>
+                <span>Corte láser</span>
+                <span>Router CNC</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="digital-gallery">
+            <figure>
+              <div class="project-photo">
+                <img
+                  data-project-image="digitalProceso"
+                  alt="Registro del proceso de fabricación digital"
+                  decoding="async"
+                >
+                <p class="photo-error" hidden>Imagen no disponible</p>
+              </div>
+              <figcaption>01 / Proceso de fabricación digital</figcaption>
+            </figure>
+
+            <figure>
+              <div class="project-photo">
+                <img
+                  data-project-image="digitalDado"
+                  alt="Dado del conjunto de proyectos de fabricación digital"
+                  decoding="async"
+                >
+                <p class="photo-error" hidden>Imagen no disponible</p>
+              </div>
+              <figcaption>02 / Dado</figcaption>
+            </figure>
+
+            <figure>
+              <div class="project-photo">
+                <img
+                  data-project-image="digitalVistaTres"
+                  alt="Registro de trabajo de modelado y fabricación"
+                  decoding="async"
+                >
+                <p class="photo-error" hidden>Imagen no disponible</p>
+              </div>
+              <figcaption>03 / Registro de fabricación</figcaption>
+            </figure>
+
+            <figure>
+              <div class="project-photo">
+                <img
+                  data-project-image="digitalVistaCuatro"
+                  alt="Vista de un trabajo de fabricación digital"
+                  decoding="async"
+                >
+                <p class="photo-error" hidden>Imagen no disponible</p>
+              </div>
+              <figcaption>04 / Desarrollo digital</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="fabrication-group" aria-labelledby="titulo-proyectar">
+          <div class="area-intro">
+            <h2 id="titulo-proyectar">Proyectar la<br>fabricación</h2>
+            <p>
+              En los proyectos más extensos, cada prueba ayuda a decidir
+              qué ajustar y qué conservar de la idea inicial. Uso AutoCAD
+              y Fusion 360 para diseñar piezas, revisar medidas y preparar
+              nuevas versiones. Al probarlas en el material, puedo comprobar
+              si sus uniones, movimientos y formas responden al uso previsto.
+            </p>
+          </div>
+
+          <article id="lampara-cinetica" class="construction-project" aria-labelledby="titulo-lampara">
+            <div class="construction-project-head">
+              <div>
+                <span class="mono">Proyecto 01 / Fabricación digital</span>
+                <h3 id="titulo-lampara">Lámpara<br>cinética</h3>
+
+                <div class="project-materials">
+                  <span>Madera</span>
+                  <span>Corte y grabado</span>
+                  <span>Luz</span>
+                  <span>Movimiento</span>
+                  <span>Sonido</span>
+                </div>
+              </div>
+
+              <div class="construction-project-copy">
+                <p>
+                  El encargo consistía en diseñar una lámpara cinética
+                  para un gesto y una situación específicos. Elegí el
+                  gesto de abrir la carta en un restaurante y diseñé una
+                  pieza de madera con el menú grabado y letras caladas.
+                </p>
+
+                <p>
+                  Al abrir la carta, el movimiento activaba una luz que
+                  se proyectaba sobre las letras caladas para facilitar
+                  la lectura del menú. El mismo gesto encendía un
+                  parlante con música ambiental, pensada para acompañar
+                  la experiencia en el local.
+                </p>
+              </div>
+            </div>
+
+            <div class="construction-gallery">
+              <figure>
+                <div class="project-photo">
+                  <img
+                    data-project-image="lamparaPrincipal"
+                    alt="Vista principal del proyecto Lámpara cinética"
+                    decoding="async"
+                  >
+                  <p class="photo-error" hidden>Imagen no disponible</p>
+                </div>
+                <figcaption>01 / Lámpara cinética</figcaption>
+              </figure>
+
+              <figure>
+                <div class="project-photo">
+                  <img
+                    data-project-image="lamparaDetalle"
+                    alt="Vista complementaria de la carta cinética"
+                    decoding="async"
+                  >
+                  <p class="photo-error" hidden>Imagen no disponible</p>
+                </div>
+                <figcaption>02 / Carta cinética</figcaption>
+              </figure>
+
+              <figure>
+                <div class="project-photo">
+                  <img
+                    data-project-image="lamparaRegistro"
+                    alt="Registro del proyecto de la lámpara cinética"
+                    decoding="async"
+                  >
+                  <p class="photo-error" hidden>Imagen no disponible</p>
+                </div>
+                <figcaption>03 / Registro del proyecto</figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article id="silla-por-encajes" class="construction-project" aria-labelledby="titulo-silla">
+            <div class="construction-project-head">
+              <div>
+                <span class="mono">Proyecto 02 / Fabricación digital</span>
+                <h3 id="titulo-silla">Silla<br>por encajes</h3>
+
+                <div class="project-materials">
+                  <span>AutoCAD</span>
+                  <span>Fusion 360</span>
+                  <span>Corte láser</span>
+                  <span>Encajes</span>
+                  <span>Prototipado</span>
+                </div>
+              </div>
+
+              <div class="construction-project-copy">
+                <p>
+                  Diseñé una silla a partir de pruebas de encaje entre
+                  sus piezas. Trabajé con Fusion 360 y AutoCAD para
+                  desarrollar las formas, definir las medidas y preparar
+                  los archivos para la cortadora láser.
+                </p>
+
+                <p>
+                  Las pruebas físicas me permitieron revisar cómo se
+                  armaba la silla y detectar qué uniones necesitaban
+                  ajustes. Así pude afinar los encajes antes de pasar
+                  a la maqueta final.
+                </p>
+              </div>
+            </div>
+
+            <div class="construction-gallery">
+              <figure>
+                <div class="project-photo">
+                  <img
+                    data-project-image="sillaMaqueta"
+                    alt="Vista principal de la maqueta final de la silla"
+                    decoding="async"
+                  >
+                  <p class="photo-error" hidden>Imagen no disponible</p>
+                </div>
+                <figcaption>01 / Maqueta final</figcaption>
+              </figure>
+
+              <figure>
+                <div class="project-photo">
+                  <img
+                    data-project-image="sillaPrototipo"
+                    alt="Vista del prototipo de la silla por encajes"
+                    decoding="async"
+                  >
+                  <p class="photo-error" hidden>Imagen no disponible</p>
+                </div>
+                <figcaption>02 / Prototipo</figcaption>
+              </figure>
+
+              <figure>
+                <div class="project-photo">
+                  <img
+                    data-project-image="sillaRegistro"
+                    alt="Registro complementario del proyecto de la silla"
+                    decoding="async"
+                  >
+                  <p class="photo-error" hidden>Imagen no disponible</p>
+                </div>
+                <figcaption>03 / Registro del proyecto</figcaption>
+              </figure>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      <!-- COMUNICACIÓN E INTERACCIÓN -->
+
+      <section id="comunicacion" class="section">
+        <div class="section-label mono">
+          <span>04 / Comunicación e interacción</span>
+          <span>Identidad visual y diseño web</span>
+        </div>
+
+        <div class="area-intro">
+          <h2>Dar forma<br>a lo que<br>comunico.</h2>
+
+          <p>
+            Trabajo con la identidad visual y la organización de la
+            información para que un negocio pueda comunicar quién es
+            y para que un sitio web se pueda recorrer con facilidad.
+          </p>
+        </div>
+
+        <article id="rediseno-marca" class="construction-project" aria-labelledby="titulo-marca">
+          <div class="construction-project-head">
+            <div>
+              <span class="mono">Proyecto 01 / Identidad visual</span>
+              <h3 id="titulo-marca">Rediseño<br>de marca</h3>
+
+              <div class="project-materials">
+                <span>Emporio Mini Marquez</span>
+                <span>Valparaíso</span>
+                <span>Identidad visual</span>
+                <span>Redes sociales</span>
+              </div>
+            </div>
+
+            <div class="construction-project-copy">
+              <p>
+                Para este proyecto conversé con el emprendedor a cargo
+                de Emporio Mini Marquez, un negocio local de Valparaíso.
+                Estudié su clientela y la historia del local para entender
+                qué lo distingue y cómo se relaciona con su entorno porteño.
+              </p>
+
+              <p>
+                A partir de esa investigación, propuse una identidad visual
+                acorde con el carácter del negocio. La apliqué al rediseño
+                de sus redes sociales, con piezas para el feed y las historias
+                que comparten un mismo lenguaje visual.
+              </p>
+            </div>
+          </div>
+
+          <div class="brand-gallery">
+            <figure>
+              <div class="project-photo">
+                <img
+                  data-project-image="marcaUno"
+                  alt="Lámina 1 del rediseño de marca de Emporio Mini Marquez"
+                  decoding="async"
+                >
+                <p class="photo-error" hidden>Imagen no disponible</p>
+              </div>
+              <figcaption>01 / Emporio Mini Marquez</figcaption>
+            </figure>
+
+            <figure>
+              <div class="project-photo">
+                <img
+                  data-project-image="marcaDos"
+                  alt="Lámina 2 del rediseño de marca de Emporio Mini Marquez"
+                  decoding="async"
+                >
+                <p class="photo-error" hidden>Imagen no disponible</p>
+              </div>
+              <figcaption>02 / Emporio Mini Marquez</figcaption>
+            </figure>
+
+            <figure>
+              <div class="project-photo">
+                <img
+                  data-project-image="marcaTres"
+                  alt="Lámina 3 del rediseño de marca de Emporio Mini Marquez"
+                  decoding="async"
+                >
+                <p class="photo-error" hidden>Imagen no disponible</p>
+              </div>
+              <figcaption>03 / Emporio Mini Marquez</figcaption>
+            </figure>
+
+            <figure>
+              <div class="project-photo">
+                <img
+                  data-project-image="marcaCuatro"
+                  alt="Lámina 4 del rediseño de marca de Emporio Mini Marquez"
+                  decoding="async"
+                >
+                <p class="photo-error" hidden>Imagen no disponible</p>
+              </div>
+              <figcaption>04 / Emporio Mini Marquez</figcaption>
+            </figure>
+
+            <figure>
+              <div class="project-photo">
+                <img
+                  data-project-image="marcaCinco"
+                  alt="Lámina 5 del rediseño de marca de Emporio Mini Marquez"
+                  decoding="async"
+                >
+                <p class="photo-error" hidden>Imagen no disponible</p>
+              </div>
+              <figcaption>05 / Emporio Mini Marquez</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article id="rediseno-web-angol" class="construction-project" aria-labelledby="titulo-web-angol">
+          <div class="construction-project-head">
+            <div>
+              <span class="mono">Proyecto 02 / Diseño web</span>
+              <h3 id="titulo-web-angol">Rediseño de<br>página web</h3>
+
+              <div class="project-materials">
+                <span>Municipalidad de Angol</span>
+                <span>Navegación</span>
+                <span>HTML y CSS</span>
+                <span>GitHub Pages</span>
+              </div>
+            </div>
+
+            <div class="construction-project-copy">
+              <p>
+                Rediseñé el sitio web de la Municipalidad de Angol y
+                publiqué el prototipo en GitHub Pages. Organicé los
+                contenidos y revisé las rutas de navegación para facilitar
+                el acceso a la información municipal.
+              </p>
+
+              <p>
+                También ajusté la jerarquía de los títulos, la distribución
+                de los contenidos y la apariencia de las páginas para hacer
+                más clara la lectura a lo largo del sitio.
+              </p>
+
+              <a
+                class="project-link"
+                href="https://gerardoacevedo19.github.io/Proyecto-final-code/index.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                VER EL REDISEÑO COMPLETO ↗
+              </a>
+            </div>
+          </div>
+
+          <figure>
+            <div class="project-photo">
+              <img
+                data-project-image="webAngol"
+                alt="Imagen del rediseño web de la Municipalidad de Angol"
+                decoding="async"
+              >
+              <p class="photo-error" hidden>Imagen no disponible</p>
+            </div>
+            <figcaption>01 / Rediseño web de Angol</figcaption>
+          </figure>
+        </article>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- CONTACTO -->
+
+  <section id="contacto" class="contact">
+    <div class="mono">05 / Contacto · Sigamos conversando</div>
+    <h2>HAGAMOS<br>CONTACTO ↗</h2>
+
+    <div class="contact-main">
+      <div class="contact-item">
+        <span class="mono">Correo</span>
+        <a href="mailto:gerardo.acevedo.f@mail.pucv.cl">
+          gerardo.acevedo.f@mail.pucv.cl
+        </a>
+      </div>
+
+      <div class="contact-item">
+        <span class="mono">Teléfono</span>
+        <a href="tel:+56977688080">+56 9 7768 8080</a>
+      </div>
+
+      <div class="contact-item">
+        <span class="mono">Instagram</span>
+        <a href="https://www.instagram.com/geervrdo/" target="_blank" rel="noopener noreferrer">
+          @geervrdo ↗
+        </a>
+      </div>
+
+      <div class="contact-item">
+        <span class="mono">GitHub</span>
+        <a href="https://github.com/gerardoacevedo19" target="_blank" rel="noopener noreferrer">
+          gerardoacevedo19 ↗
+        </a>
+      </div>
+    </div>
+
+    <footer class="mono">
+      <span>Gerardo Acevedo / Diseño Industrial / PUCV</span>
+      <a href="#portada">Volver al inicio ↑</a>
+    </footer>
+  </section>
+
+  <script>
+    /* NOMBRES DE LAS IMÁGENES */
+
+    const imageNames = {
+      principal: "construccion 1",
+      croquis: "croquis construccion 1",
+      registro: "imagen construccion",
+
+      objetoPrincipal: "construccion 2",
+      objetoRegistro: "construccion 2.1",
+      objetoCroquis: "construccion 2 croquis",
+      objetoCroquisDetalle: "construccoin 2 croquis 2.1",
+
+      terrenoPrincipal: "1000004767",
+      terrenoRegistro: "construccion 3",
+
+      digitalProceso: "1200px-PrKOKKOPMMKKKKOoceso_(1)",
+      digitalDado: "dadoo",
+      digitalVistaTres: "3d3",
+      digitalVistaCuatro: "3d4",
+
+      lamparaPrincipal: "3d",
+      lamparaDetalle: "3d1",
+      lamparaRegistro: "imagena3",
+
+      sillaMaqueta: "MAQUETA_SILLA_FINAL",
+      sillaPrototipo: "Silla_proototgbfhfgipo_2",
+      sillaRegistro: "921px-WhatsApp_Image_2025-06-07_at_5.24.38_PM_(3)",
+
+      marcaUno: "Emporio Mini Marquez.pptx (1)",
+      marcaDos: "Emporio Mini Marquez.pptx (2)",
+      marcaTres: "Emporio Mini Marquez.pptx (3)",
+      marcaCuatro: "Emporio Mini Marquez.pptx (4)",
+      marcaCinco: "Emporio Mini Marquez.pptx",
+
+      webAngol: "web angol"
+    };
+
+    /* MENÚ */
+
+    const menuButton = document.querySelector(".menu-button");
+    const menu = document.querySelector("#menu");
+
+    menuButton.addEventListener("click", () => {
+      const expanded = menuButton.getAttribute("aria-expanded") !== "true";
+
+      menuButton.setAttribute("aria-expanded", String(expanded));
+      menuButton.textContent = expanded ? "Cerrar −" : "Menú +";
+      menu.classList.toggle("open", expanded);
+    });
+
+    menu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        menu.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.textContent = "Menú +";
+      });
+    });
+
+    /* CARGA DE IMÁGENES */
+
+    function comprobarImagen(path) {
+      return new Promise(resolve => {
+        const test = new Image();
+
+        test.onload = () => {
+          resolve(test.naturalWidth > 0 ? test.src : null);
+        };
+
+        test.onerror = () => resolve(null);
+        test.src = path;
+      });
+    }
+
+    async function encontrarImagen(name) {
+      if (!name) return null;
+
+      if (
+        /\.(png|jpe?g|webp|jfif|avif)$/i.test(name) ||
+        /^(data:|blob:|https?:)/i.test(name)
+      ) {
+        return comprobarImagen(name);
+      }
+
+      const folders = ["./", "./imagenes/"];
+      const extensions = [
+        ".png", ".jpg", ".jpeg", ".webp", ".jfif", ".avif",
+        ".PNG", ".JPG", ".JPEG", ".WEBP", ".JFIF", ".AVIF"
+      ];
+
+      for (const folder of folders) {
+        for (const extension of extensions) {
+          const path = new URL(
+            folder + name + extension,
+            document.baseURI
+          ).href;
+
+          const found = await comprobarImagen(path);
+
+          if (found) return found;
+        }
+      }
+
+      return null;
+    }
+
+    const constructionSection = document.querySelector("#construccion");
+
+    const moduleReferenceRatios = {
+      principal: "--module-main-ratio",
+      croquis: "--module-secondary-ratio"
+    };
+
+    const imageSearches = new Map();
+
+    document.querySelectorAll("[data-project-image]").forEach(async img => {
+      const key = img.dataset.projectImage;
+      const name = imageNames[key];
+      const container = img.parentElement;
+      const errorMessage = container.querySelector(".photo-error");
+
+      function mostrarImagen() {
+        if (!img.naturalWidth || !img.naturalHeight) return;
+
+        const ratio = `${img.naturalWidth} / ${img.naturalHeight}`;
+        container.style.setProperty("--photo-ratio", ratio);
+
+        const referenceProperty = moduleReferenceRatios[key];
+
+        if (referenceProperty) {
+          constructionSection.style.setProperty(referenceProperty, ratio);
+        }
+
+        img.classList.add("is-loaded");
+        if (errorMessage) errorMessage.hidden = true;
+      }
+
+      try {
+        if (!imageSearches.has(name)) {
+          imageSearches.set(name, encontrarImagen(name));
+        }
+
+        const path = await imageSearches.get(name);
+
+        if (!path) {
+          if (errorMessage) errorMessage.hidden = false;
+          console.warn("No se encontró la imagen:", name);
+          return;
+        }
+
+        img.onload = mostrarImagen;
+
+        img.onerror = () => {
+          if (errorMessage) errorMessage.hidden = false;
+        };
+
+        img.src = path;
+
+        if (img.complete && img.naturalWidth) {
+          mostrarImagen();
+        }
+      } catch (error) {
+        if (errorMessage) errorMessage.hidden = false;
+        console.warn("No se pudo cargar la imagen:", name, error);
+      }
+    });
+
+    /* VISORES 3D / TALADRO Y DADO */
+
+    document.querySelectorAll(".art-model iframe[data-model-state]").forEach(frame => {
+      let preparedDocument = null;
+      let timer = null;
+      let observer = null;
+      let resizeRequest = null;
+
+      function prepararVisor() {
+        let childDocument;
+        let childWindow;
+
+        try {
+          childDocument = frame.contentDocument;
+          childWindow = frame.contentWindow;
+
+          if (!childDocument || !childDocument.head) return;
+          if (!childDocument.querySelector("#visor")) return;
+          if (preparedDocument === childDocument) return;
+
+          clearInterval(timer);
+          cancelAnimationFrame(resizeRequest);
+
+          if (observer) observer.disconnect();
+
+          preparedDocument = childDocument;
+
+          const style = childDocument.createElement("style");
+
+          style.textContent = `
+            html, body, #visor, canvas {
+              background: transparent !important;
+            }
+
+            html, body {
+              width: 100% !important;
+              height: 100% !important;
+              margin: 0 !important;
+              padding: 0 !important;
+              overflow: hidden !important;
+            }
+
+            #visor {
+              width: 100% !important;
+              height: 100% !important;
+              min-height: 0 !important;
+            }
+
+            .controles, nav.controles, #giro, #reset {
+              display: none !important;
+              visibility: hidden !important;
+              pointer-events: none !important;
+            }
+          `;
+
+          childDocument.head.appendChild(style);
+        } catch (error) {
+          console.warn(
+            "Abre el portafolio desde GitHub Pages para aplicar los ajustes internos del visor.",
+            error
+          );
+          return;
+        }
+
+        let attempts = 0;
+
+        function conectarModelo() {
+          attempts++;
+
+          const state = childWindow[frame.dataset.modelState];
+
+          if (!state) {
+            if (attempts >= 300) clearInterval(timer);
+            return false;
+          }
+
+          clearInterval(timer);
+
+          const { model, camera, controls, renderer, scene } = state;
+          const host = childDocument.querySelector("#visor");
+
+          if (!host) return true;
+
+          scene.background = null;
+          renderer.setClearColor(0x000000, 0);
+          model.updateWorldMatrix(true, true);
+
+          let bounds = null;
+
+          model.traverse(part => {
+            if (!part.isMesh || !part.geometry) return;
+
+            if (!part.geometry.boundingBox) {
+              part.geometry.computeBoundingBox();
+            }
+
+            const box = part.geometry.boundingBox
+              .clone()
+              .applyMatrix4(part.matrixWorld);
+
+            if (bounds) {
+              bounds.union(box);
+            } else {
+              bounds = box;
+            }
+          });
+
+          if (!bounds || bounds.isEmpty()) return true;
+
+          const center = bounds.getCenter(camera.position.clone().set(0, 0, 0));
+          const size = bounds.getSize(camera.position.clone().set(0, 0, 0));
+          const horizontalRadius = Math.hypot(size.x, size.z) / 2;
+          const halfHeight = size.y / 2;
+
+          function ajustarEncuadre() {
+            const width = host.clientWidth;
+            const height = host.clientHeight;
+
+            if (!width || !height) return;
+
+            const aspect = width / height;
+            camera.fov = 33;
+
+            const verticalAngle = camera.fov * Math.PI / 360;
+            const horizontalAngle = Math.atan(Math.tan(verticalAngle) * aspect);
+
+            const direction = camera.position
+              .clone()
+              .sub(controls.target)
+              .normalize();
+
+            const elevation = Math.asin(Math.min(1, Math.abs(direction.y)));
+
+            const projectedHalfHeight =
+              halfHeight * Math.cos(elevation) +
+              horizontalRadius * Math.sin(elevation);
+
+            const depth =
+              horizontalRadius * Math.cos(elevation) +
+              halfHeight * Math.sin(elevation);
+
+            const distance = (
+              Math.max(
+                horizontalRadius / Math.tan(horizontalAngle),
+                projectedHalfHeight / Math.tan(verticalAngle)
+              ) + depth
+            ) * 1.06;
+
+            renderer.setSize(width, height);
+            camera.aspect = aspect;
+            camera.updateProjectionMatrix();
+
+            controls.target.copy(center);
+            controls.minDistance = distance * .65;
+            controls.maxDistance = distance * 2.5;
+
+            camera.position.copy(center).addScaledVector(direction, distance);
+            camera.lookAt(center);
+
+            controls.update();
+            controls.saveState();
+          }
+
+          function programarEncuadre() {
+            cancelAnimationFrame(resizeRequest);
+
+            resizeRequest = requestAnimationFrame(() => {
+              resizeRequest = requestAnimationFrame(ajustarEncuadre);
+            });
+          }
+
+          programarEncuadre();
+
+          observer = new ResizeObserver(programarEncuadre);
+          observer.observe(frame);
+
+          return true;
+        }
+
+        if (!conectarModelo()) {
+          timer = setInterval(conectarModelo, 100);
+        }
+      }
+
+      frame.addEventListener("load", prepararVisor);
+      prepararVisor();
+    });
+  </script>
+</body>
+</html>
